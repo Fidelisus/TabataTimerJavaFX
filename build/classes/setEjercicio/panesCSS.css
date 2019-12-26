@@ -1,0 +1,7 @@
+VBox, HBox {
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-background-color: #87cefa80 ;
+    /*-fx-border-width: 10;*/
+    -fx-opacity: 0.95;
+}
