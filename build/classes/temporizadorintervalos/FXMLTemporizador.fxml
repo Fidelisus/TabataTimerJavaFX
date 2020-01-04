@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -124,27 +126,55 @@
                   </Text>
                </children>
             </StackPane>
-            <HBox alignment="CENTER" spacing="12.0" VBox.vgrow="NEVER">
+            <HBox alignment="CENTER" spacing="25.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="iniBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#iniciar" prefHeight="41.0" prefWidth="107.0" text="Iniciar">
+                  <Button fx:id="iniBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#iniciar" prefHeight="80.0" prefWidth="80.0">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="67.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/iniciar.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="reaBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reanudar" text="Reanudar">
+                  <Button fx:id="reaBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#reanudar" prefHeight="80.0" prefWidth="80.0">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <graphic>
+                        <ImageView fx:id="reanudarIcon" fitHeight="64.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/reanudar.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="parBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#parar" text="Parar">
+                  <Button fx:id="parBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#parar" prefHeight="80.0" prefWidth="80.0">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="63.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/parar.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="sigBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#siguiente" text="Siguiente">
+                  <Button fx:id="sigBut" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#siguiente" prefHeight="80.0" prefWidth="80.0">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="64.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/siguiente.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </HBox>

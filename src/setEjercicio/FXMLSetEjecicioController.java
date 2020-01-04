@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.text.Text;
@@ -113,7 +112,6 @@ private String tituloAnterior;
         sesion.setT_ejercicio(Duration.ofSeconds(tiempoTrabajo.getMinute()*60 + tiempoTrabajo.getSecond()));
         sesion.setDescanso_ejercicio(Duration.ofSeconds(tiempoDescanso.getMinute()*60 + tiempoDescanso.getSecond()));
         sesionPropoerty.set(sesion);
-        System.out.println(sesion);
 
         primaryStage.setTitle(tituloAnterior);
         primaryStage.setScene(escenaAnterior);
@@ -231,7 +229,7 @@ private String tituloAnterior;
             textCircuitos.setText(tiempoCircuitos.getMinute() + ":" + tiempoCircuitos.getSecond());
     }
 
-    public ReadOnlyObjectProperty<Sesion> currentCustomerProperty() {
+    public ReadOnlyObjectProperty<Sesion> currentSesionProperty() {
         return sesionPropoerty.getReadOnlyProperty() ;
     }
 

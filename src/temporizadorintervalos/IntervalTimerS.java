@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.scene.media.AudioClip;
 import modelo.Sesion;
 import static temporizadorintervalos.IntervalTimerS.EstadoSesion.*;
 
@@ -32,6 +33,8 @@ public class IntervalTimerS extends Service<Boolean> {
     private static long startTime = 0;// guarda la hora del instante inicial del intervalo
     private static long stoppedDuration = 0;// guarda la duracion del tiempo que hemos estdo detenidos
     private static Long stoppedTime;
+    private static long tiempoReal = 0;
+    private static long tiempoRealStart = 0;
 
     private int ejercicioActual = 1;
     private int circuitoActual = 1;
@@ -39,6 +42,9 @@ public class IntervalTimerS extends Service<Boolean> {
 
     private EstadoSesion estadoActual = PREPARADO;
     private ReadOnlyObjectWrapper<EstadoSesion> estadoProperty = new ReadOnlyObjectWrapper<>();
+    
+    AudioClip timbreCorto = new AudioClip(getClass().getResource("timbreCorto.mp3").toString());
+    AudioClip timbreLargo = new AudioClip(getClass().getResource("timbreLargo.mp3").toString());
     
     public ReadOnlyObjectWrapper estadoProperty() {
         return estadoProperty;
@@ -62,6 +68,11 @@ public class IntervalTimerS extends Service<Boolean> {
     
     public boolean isCambiarEstado() {
         return cambiarEstado;
+    }
+    
+    public long getTiempoReal(){
+        tiempoReal = System.currentTimeMillis() - tiempoRealStart;
+        return tiempoReal;
     }
 
     /**
@@ -102,6 +113,7 @@ public class IntervalTimerS extends Service<Boolean> {
         Long minutos = sesion.getT_ejercicio().toMinutes();
         Long segundos = sesion.getT_ejercicio().minusMinutes(minutos).getSeconds();
         tiempo.setValue(String.format("%02d", minutos) + ":" + String.format("%02d", segundos));
+        
     }
 
     public void restaurarInicio() {
@@ -115,9 +127,7 @@ public class IntervalTimerS extends Service<Boolean> {
             Long minutos = sesion.getT_ejercicio().toMinutes();
             Long segundos = sesion.getT_ejercicio().minusMinutes(minutos).getSeconds();
             tiempo.setValue(String.format("%02d", minutos) + ":" + String.format("%02d", segundos));
-            
             Platform.runLater(() -> {
-                //tiempo.setValue(String.format("%02d", 0) + ":" + String.format("%02d", 0));
             });
         }
     }
@@ -132,6 +142,7 @@ public class IntervalTimerS extends Service<Boolean> {
             boolean cambiaEstado() {
                 // rest de los tiempos acumulados y el inicial del intervalo
                 // el estado puede ser detenido o en marcha, hay que comprobar
+                timbreLargo.play();
                 startTime = currentTime;
                 stoppedDuration = 0;
                 stoppedTime = null;
@@ -183,7 +194,8 @@ public class IntervalTimerS extends Service<Boolean> {
                 
                 final Long minutosTotal = durations.get(estadoActual).toMinutes();
                 final Long segundosTotal = durations.get(estadoActual).minusMinutes(minutos).getSeconds();
-                //durations.get(estadoActual).minus(duration).toMinutes();
+                
+                if(minutosTotal - minutos == 0 && segundosTotal - segundos <= 3 && segundosTotal - segundos > 0) timbreCorto.play();
                 Platform.runLater(() -> {
                     tiempo.setValue(String.format("%02d", minutosTotal - minutos) + ":" + String.format("%02d", segundosTotal - segundos));
                 });
@@ -209,6 +221,7 @@ public class IntervalTimerS extends Service<Boolean> {
                     startTime = currentTime = System.currentTimeMillis();
 //                    if (firstTime) {
                     if (estadoActual == PREPARADO) { // es lla primera vez que arrancamos el servicio
+                        tiempoRealStart = System.currentTimeMillis();
                         ejercicioActual = 1;
                         circuitoActual = 1;
                         estadoActual = TRABAJO;

@@ -19,14 +19,14 @@ import javafx.stage.Stage;
  * @author jsoler
  */
 public class TemporizadorIntervalos extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLTemporizador.fxml"));
-        Pane root= (Pane) loader.load();
+        Pane root = (Pane) loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        
+
         FXMLTemporizadorController temporizadorController = loader.<FXMLTemporizadorController>getController();
         temporizadorController.initStage(stage);
         stage.setResizable(false);
@@ -39,5 +39,5 @@ public class TemporizadorIntervalos extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
